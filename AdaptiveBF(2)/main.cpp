@@ -12,7 +12,7 @@
 
 using namespace std;
 
-void allTests(size_t n, double eps, size_t lim, int shift, int uni_size, ostream &os);
+void allTests(size_t n, double eps, size_t lookupsNum, int shift, int uni_size, ostream &os);
 
 void allTestsArray(size_t *nArray, size_t nArraySize, double *epsArray, size_t epsArraySize, int shift,
                    int uni_size, ostream &os);
@@ -24,9 +24,9 @@ int main() {
     int uni_size = 64;
     int shift = 6;
 
-    size_t factor = E4 * 5;
+    size_t factor = 1000 * 5;
     size_t n = factor << 1;
-    size_t lim = factor << 1;
+    size_t lookupsNum = factor << 1;
     double eps = 0.01;
 
 
@@ -43,7 +43,8 @@ int main() {
     epsArray[0] = eps;
     for (int i = 1; i < b; ++i) epsArray[i] = epsArray[i - 1] * 0.5;
 
-    allTestsArray(nArray, a, epsArray, b, shift, uni_size, os);
+    testHelperRates(n,eps,lookupsNum,shift,uni_size);
+//    allTestsArray(nArray, a, epsArray, b, shift, uni_size, os);
 
 
     fb.close();
@@ -51,14 +52,14 @@ int main() {
     return 0;
 }
 
-void allTests(size_t n, double eps, size_t lim, int shift, int uni_size, ostream &os) {
-    os << "Number of elements: " << n << "\teps: " << eps << "\tNumber of Lookups: " << lim << endl;
-    cout << "Number of elements: " << n << "\teps: " << eps << "\tNumber of Lookups: " << lim << endl;
+void allTests(size_t n, double eps, size_t lookupsNum, int shift, int uni_size, ostream &os) {
+    os << "Number of elements: " << n << "\teps: " << eps << "\tNumber of Lookups: " << lookupsNum << endl;
+    cout << "Number of elements: " << n << "\teps: " << eps << "\tNumber of Lookups: " << lookupsNum << endl;
 
     os << "TN tests:" << endl;
     cout << "TN tests:" << endl;
-    testHelperTN(n, eps, lim, shift, uni_size,os);
-    testNonAdaptiveTN(n, eps, lim, shift, uni_size,os);
+    testHelperTN(n, eps, lookupsNum, shift, uni_size,os);
+    testNonAdaptiveTN(n, eps, lookupsNum, shift, uni_size,os);
 
     os << "TP tests:" << endl;
     cout << "TP tests:" << endl;
@@ -67,17 +68,17 @@ void allTests(size_t n, double eps, size_t lim, int shift, int uni_size, ostream
 
     os << "Random tests:" << endl;
     cout << "Random tests:" << endl;
-    testHelperRates(n, eps, lim, shift, uni_size, os);
-    testNonAdaptiveRates(n, eps, lim, shift, uni_size, os);
+    testHelperRates(n, eps, lookupsNum, shift, uni_size, os);
+    testNonAdaptiveRates(n, eps, lookupsNum, shift, uni_size, os);
 
     cout << "Number of lookups reduced by eps" << endl;
     os << "Number of lookups reduced by eps" << endl;
-    lim = size_t(eps * lim);
+    lookupsNum = size_t(eps * lookupsNum);
 
     os << "FP tests:" << endl;
     cout << "FP tests:" << endl;
-    testHelperFP(n, eps, lim, shift, uni_size, os);
-    testNonAdaptiveFP(n, eps, lim, shift, uni_size, os);
+    testHelperFP(n, eps, lookupsNum, shift, uni_size, os);
+    testNonAdaptiveFP(n, eps, lookupsNum, shift, uni_size, os);
 }
 
 void allTestsArray(size_t *nArray, size_t nArraySize, double *epsArray, size_t epsArraySize, int shift,
