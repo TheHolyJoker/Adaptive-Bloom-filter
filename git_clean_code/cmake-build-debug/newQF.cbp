@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="newQF"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/tomer/Desktop/Project/CQF/newQF (copy)/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/tomer/Desktop/Project/CQF/newQF\ (copy)/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/tomer/Desktop/Project/CQF/newQF\ (copy)/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/tomer/Desktop/Project/CQF/newQF\ (copy)/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/tomer/Desktop/Project/CQF/newQF\ (copy)/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/tomer/Desktop/Project/CQF/newQF (copy)/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/tomer/Desktop/Project/CQF/newQF\ (copy)/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/tomer/Desktop/Project/CQF/newQF\ (copy)/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/tomer/Desktop/Project/CQF/newQF\ (copy)/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/tomer/Desktop/Project/CQF/newQF\ (copy)/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/tomer/Desktop/Project/CQF/newQF (copy)/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/tomer/Desktop/Project/CQF/newQF\ (copy)/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/tomer/Desktop/Project/CQF/newQF\ (copy)/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/tomer/Desktop/Project/CQF/newQF\ (copy)/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/tomer/Desktop/Project/CQF/newQF\ (copy)/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="newQF">
+				<Option output="/home/tomer/Desktop/Project/CQF/newQF (copy)/cmake-build-debug/newQF" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/tomer/Desktop/Project/CQF/newQF (copy)/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/tomer/Desktop/Project/CQF/newQF\ (copy)/cmake-build-debug/Makefile&quot;  VERBOSE=1 newQF"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/tomer/Desktop/Project/CQF/newQF\ (copy)/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/tomer/Desktop/Project/CQF/newQF\ (copy)/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/tomer/Desktop/Project/CQF/newQF\ (copy)/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="newQF/fast">
+				<Option output="/home/tomer/Desktop/Project/CQF/newQF (copy)/cmake-build-debug/newQF" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/tomer/Desktop/Project/CQF/newQF (copy)/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/tomer/Desktop/Project/CQF/newQF\ (copy)/cmake-build-debug/Makefile&quot;  VERBOSE=1 newQF/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/tomer/Desktop/Project/CQF/newQF\ (copy)/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/tomer/Desktop/Project/CQF/newQF\ (copy)/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/tomer/Desktop/Project/CQF/newQF\ (copy)/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/tomer/Desktop/Project/CQF/newQF (copy)/GlobalFunctions/globalFunction.cpp">
+			<Option target="newQF"/>
+		</Unit>
+		<Unit filename="/home/tomer/Desktop/Project/CQF/newQF (copy)/GlobalFunctions/globalFunction.h">
+			<Option target="newQF"/>
+		</Unit>
+		<Unit filename="/home/tomer/Desktop/Project/CQF/newQF (copy)/Hash/Hash.cpp">
+			<Option target="newQF"/>
+		</Unit>
+		<Unit filename="/home/tomer/Desktop/Project/CQF/newQF (copy)/Hash/Hash.h">
+			<Option target="newQF"/>
+		</Unit>
+		<Unit filename="/home/tomer/Desktop/Project/CQF/newQF (copy)/Hash/MurmurHash3.cpp">
+			<Option target="newQF"/>
+		</Unit>
+		<Unit filename="/home/tomer/Desktop/Project/CQF/newQF (copy)/Hash/MurmurHash3.h">
+			<Option target="newQF"/>
+		</Unit>
+		<Unit filename="/home/tomer/Desktop/Project/CQF/newQF (copy)/QuotientFilter/BasicFilter.cpp">
+			<Option target="newQF"/>
+		</Unit>
+		<Unit filename="/home/tomer/Desktop/Project/CQF/newQF (copy)/QuotientFilter/BasicFilter.h">
+			<Option target="newQF"/>
+		</Unit>
+		<Unit filename="/home/tomer/Desktop/Project/CQF/newQF (copy)/QuotientFilter/BitArray.cpp">
+			<Option target="newQF"/>
+		</Unit>
+		<Unit filename="/home/tomer/Desktop/Project/CQF/newQF (copy)/QuotientFilter/BitArray.h">
+			<Option target="newQF"/>
+		</Unit>
+		<Unit filename="/home/tomer/Desktop/Project/CQF/newQF (copy)/QuotientFilter/DB.cpp">
+			<Option target="newQF"/>
+		</Unit>
+		<Unit filename="/home/tomer/Desktop/Project/CQF/newQF (copy)/QuotientFilter/DB.h">
+			<Option target="newQF"/>
+		</Unit>
+		<Unit filename="/home/tomer/Desktop/Project/CQF/newQF (copy)/QuotientFilter/Filter.cpp">
+			<Option target="newQF"/>
+		</Unit>
+		<Unit filename="/home/tomer/Desktop/Project/CQF/newQF (copy)/QuotientFilter/Filter.h">
+			<Option target="newQF"/>
+		</Unit>
+		<Unit filename="/home/tomer/Desktop/Project/CQF/newQF (copy)/Tests/DBtests.cpp">
+			<Option target="newQF"/>
+		</Unit>
+		<Unit filename="/home/tomer/Desktop/Project/CQF/newQF (copy)/Tests/DBtests.h">
+			<Option target="newQF"/>
+		</Unit>
+		<Unit filename="/home/tomer/Desktop/Project/CQF/newQF (copy)/main.cpp">
+			<Option target="newQF"/>
+		</Unit>
+		<Unit filename="/home/tomer/Desktop/Project/CQF/newQF (copy)/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

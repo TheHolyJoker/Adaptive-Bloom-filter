@@ -1,0 +1,3 @@
+/home/tomer/Desktop/Project/CQF/newQF (copy)/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/tomer/Desktop/Project/CQF/newQF (copy)/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/tomer/Desktop/Project/CQF/newQF (copy)/cmake-build-debug/CMakeFiles/newQF.dir
