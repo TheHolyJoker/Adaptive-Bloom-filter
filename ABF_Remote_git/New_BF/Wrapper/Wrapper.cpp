@@ -4,11 +4,10 @@
 
 #include "Wrapper.h"
 
-Wrapper::Wrapper(size_t n, double eps, bool isAdaptive) : isAdaptive(isAdaptive), bs(create_new_path()),
-                                                          sspace(&this->bs, CACHE_SIZE),
-                                                          Remote(&sspace, MAX_NODE_SIZE, MIN_FLUSH_SIZE) {
+Wrapper::Wrapper(size_t n, double eps, bool isAdaptive) : isAdaptive(isAdaptive), r(), adapt_counter(0),
+                                                          adapt_duration(0) {
     if (isAdaptive) {
-        this->depth = getDepth(n,eps);
+        this->depth = getDepth(n, eps);
 
         size_t mList[depth], kList[depth];
 
@@ -39,20 +38,28 @@ void Wrapper::add(string *s, size_t starting_level) {
     }
     //todo Rebuilt here.
     assert(false);
-    /*size_t i = 0;
-    while (i < depth) {
-
-        ++i;
-    }
-
-    assert(i < depth);*/
-/*
-    *reBuildCall = true;
-    this->reBuild();
-    this->add(s);
-*/
 
 }
+
+void Wrapper::add(string *s, size_t starting_level, bool remote_trick) {
+    if (!this->isAdaptive) {
+        bool cell_cond[BF_Vec[0].get_hash_vec_size()];
+        this->BF_Vec[0].add(s, cell_cond);
+        this->remote_add(s, 0, cell_cond);
+        return;
+    }
+
+    for (int i = starting_level; i < depth; ++i) {
+        bool cell_cond[this->get_hash_vec_size_by_level(i)];
+        bool res = this->BF_Vec[i].add(s, cell_cond);
+        this->remote_add(s, i, cell_cond);
+        if (res)
+            return;
+    }
+    //todo Rebuilt here.
+    assert(false);
+}
+
 
 void Wrapper::naive_add(string *s, size_t starting_level) {
     if (!this->isAdaptive) {
@@ -69,12 +76,24 @@ void Wrapper::naive_add(string *s, size_t starting_level) {
 }
 
 void Wrapper::remote_add(string *s, size_t level) {
-    for (auto h : this->BF_Vec[level].get_hash_vec()) {
-        uint64_t key = get_key(s, level, h);
-        this->Remote.update(key, *s + DELIM);
+    size_t keys_num = get_hash_vec_size_by_level(level);
+    size_t keys[keys_num];
+    for (int i = 0; i < keys_num; ++i) {
+        keys[i] = get_key(s, 0, i);
     }
+    this->r.add(s, keys, keys_num);
 
 }
+
+void Wrapper::remote_add(string *s, size_t level, const bool *cell_cond) {
+    size_t keys_num = get_hash_vec_size_by_level(level);
+    size_t keys[keys_num];
+    for (int i = 0; i < keys_num; ++i) {
+        keys[i] = get_key(s, 0, i);
+    }
+    this->r.add(s, keys, keys_num, cell_cond);
+}
+
 
 bool Wrapper::naive_lookup(string *s) {
     if (!this->isAdaptive)
@@ -110,8 +129,9 @@ actual_lookup_res Wrapper::lookup_verifier(string *s, bool call_adapt) {
         size_t key = get_key(s, i, 0);
 
         actual_lookup_res res = this->remote_lookup(s, key);
-        if (call_adapt & (res == 1))
-            this->adapt(s, i);
+        if (call_adapt & (res == false_positive))
+            this->adapt_time_it(s, i);
+//            this->adapt(s, i);
         return res;
     }
     assert(false);
@@ -119,35 +139,25 @@ actual_lookup_res Wrapper::lookup_verifier(string *s, bool call_adapt) {
 }
 
 actual_lookup_res Wrapper::remote_lookup(string *s, size_t key) {
-    try {
-        string temp = this->Remote.query(key);
-        if (is_sub_str(&temp, s))
-            return true_positive;
-        return false_positive;
-    } catch (out_of_range e) {
-        assert(false);
-        return false_positive; // False Positive.
-        //todo Should not be here!
-    }
+    return (r.lookup(s, key)) ? true_positive : false_positive;
 }
 
-/*string Wrapper::retrive(string *s) {
-    if (!this->is_adaptive) {
-        if (this->BF_Vec[0].lookup(s))
-            auto h = this->BF_Vec[0].get_hash_vec()[0];
-//            try {
-//                string res = this->Remote.query(h())
-//            }
-
-    }
-    return std::__cxx11::string();
-}*/
 
 //// Adapt.
 
 void Wrapper::adapt(string *s, size_t level) {
     size_t index = adapt_choose_which_index_to_stale(s, level);
     return adapt_by_index_level(level, index);
+
+}
+
+void Wrapper::adapt_time_it(string *s, size_t level) {
+    clock_t t0 = clock();
+    adapt(s, level);
+    double end = (clock() - t0) / ((double) CLOCKS_PER_SEC);
+    this->adapt_counter++;
+//    cout << "adapt duration was: " << end << endl;
+    this->adapt_duration += end;
 
 }
 
@@ -160,12 +170,9 @@ void Wrapper::adapt_by_index_level(size_t level, size_t index) {
     this->BF_Vec[level].set_stale_on(index);
     uint64_t key = (index << 4) + level; // NOLINT(hicpp-signed-bitwise)
     string elements_to_move;
-    try {
-        elements_to_move = this->Remote.query(key);
-        return adapt_insertion(&elements_to_move, level + 1);
-    } catch (out_of_range e) {
-        assert(false);
-    }
+
+    elements_to_move = this->r.retrieve(key);
+    return adapt_insertion(&elements_to_move, level + 1);
 
 }
 
@@ -179,111 +186,22 @@ void Wrapper::adapt_insertion(string *all_elements, size_t level_to_insert_in) {
         this->add(&s, level_to_insert_in);
 }
 
-//Wrapper::Wrapper(size_t n, double eps, bool is_adaptive) {
-//
-//
-//}
-
-
-//size_t Wrapper::count_files(const string *path) {
-//    return count_files(*path);
-//}
-/*
-
-Wrapper::~Wrapper() {
-    delete Remote;
-}
-*/
-//// Remote optimization attempt.
-
-actual_lookup_res Wrapper::lookup_verifier(string *s, bool call_adapt, bool remote_trick) {
-    if (!this->isAdaptive) {
-        filter_lookup_res temp_res = this->BF_Vec[0].lookup(s);
-        if (temp_res == definitely_not_in_filter)
-            return true_negative; // True Negative.
-
-        size_t key = get_key(s, 0, 0);
-        return this->remote_lookup(s, key, true);
-    }
-
-    for (int i = 0; i < depth; ++i) {
-        filter_lookup_res temp_res = this->BF_Vec[i].lookup(s);
-        if (temp_res == definitely_not_in_filter)
-            return true_negative;
-        if (temp_res == IDK_check_next_level)
-            continue;
-
-        size_t key = get_key(s, i, 0);
-
-        actual_lookup_res res = this->remote_lookup(s, key, true);
-        if (call_adapt & (res == 1))
-            this->adapt(s, i);
-        return res;
-    }
-    assert(false);
-
-}
-
-actual_lookup_res Wrapper::remote_lookup(string *s, size_t key, bool remote_trick) {
-    string temp = this->Remote.query(key);
-    if (is_sub_str(&temp, s))
-        return true_positive;
-    return false_positive;
-}
-
-
-void Wrapper::add(string *s, size_t starting_level, bool remote_trick) {
-    if (!this->isAdaptive) {
-        bool cell_cond[BF_Vec[0].get_hash_vec_size()];
-        this->BF_Vec[0].add(s, cell_cond);
-        this->remote_add(s, 0, cell_cond);
-        return;
-    }
-
-    for (int i = starting_level; i < depth; ++i) {
-        bool cell_cond[this->get_hash_vec_size_by_level(i)];
-        bool res = this->BF_Vec[i].add(s, cell_cond);
-        this->remote_add(s, i, cell_cond);
-        if (res)
-            return;
-    }
-    //todo Rebuilt here.
-    assert(false);
-}
-
-void Wrapper::remote_add(string *s, size_t level, const bool *cell_cond) {
-    vector<Hash> hashVec = this->BF_Vec[level].get_hash_vec();
-    for (int i = 0; i < hashVec.size(); ++i) {
-        uint64_t key = get_key(s, level, hashVec[i]);
-        if (cell_cond[i])
-            this->Remote.update(key, *s + DELIM);
-        else
-            this->Remote.insert(key, *s + DELIM);
-    }
-}
-
-
-
-
-bool Wrapper::is_sub_str(string *all_value, string *element) {
-    char *all = const_cast<char *>(all_value->c_str());
-    char *sub = const_cast<char *>(element->c_str());
-    char *pch;
-    pch = strtok(all, DELIM);
-    while (pch != nullptr) {
-        if (strcmp(pch, sub) == 0)
-            return true;
-        pch = strtok(nullptr, DELIM);
-    }
-    return false;
-}
 
 ////Getters Setters
+double Wrapper::get_adapt_ratio() const {
+    return (this->adapt_counter / this->adapt_duration);
+}
 
 ostream &operator<<(ostream &os, const Wrapper &wrapper) {
     for (int i = 0; i < wrapper.depth; ++i) {
         os << endl << "level " << i << endl;
         os << wrapper.BF_Vec[i] << endl;
+    }
+    if (wrapper.getAdaptCounter()) {
+        os << "adapt_time: " << wrapper.getAdaptDuration() << "\tnumber: " << wrapper.getAdaptCounter() << "\t"
+           << wrapper.get_adapt_ratio() << " el/sec" << endl;
+        cout << "adapt_time: " << wrapper.getAdaptDuration() << "\tnumber: " << wrapper.getAdaptCounter() << "\t"
+           << wrapper.get_adapt_ratio() << " el/sec" << endl;
     }
     return os;
 }
@@ -317,47 +235,12 @@ Hash Wrapper::get_hashFunc(size_t level, size_t index) {
     return this->BF_Vec[level].get_hash_vec()[index];
 }
 
-
-////paths
-size_t Wrapper::count_files(const string &path) {
-    size_t counter = 0;
-    DIR *dir;
-    struct dirent *ent;
-    const char *char_path = path.c_str();
-    if ((dir = opendir(char_path)) != nullptr) {
-        while ((ent = readdir(dir)) != nullptr)
-            counter++;
-        closedir(dir);
-        return counter;
-    }
-    return -1;
+size_t Wrapper::getAdaptCounter() const {
+    return adapt_counter;
 }
 
-string Wrapper::create_new_path() {
-    size_t counter = count_files(DEFAULT_PATH);
-    string fileNum = to_string(counter);
-    string new_file_name = DEFAULT_ABS_NAME + fileNum;
-    string string_command = "mkdir " + new_file_name;
-    const char *command = string_command.c_str();
-    system(command);
-    return new_file_name;
+double Wrapper::getAdaptDuration() const {
+    return adapt_duration;
 }
 
-void Wrapper::delete_last_path() {
-    size_t counter = count_files(DEFAULT_PATH);
-    string fileNum = to_string(--counter);
-    string new_file_name = DEFAULT_ABS_NAME + fileNum;
-    string string_command = "rm -r " + new_file_name;
-//    cout << string_command << endl;
-    const char *command = string_command.c_str();
-    system(command);
 
-}
-
-void Wrapper::delete_all_paths() {
-    string temp = DEFAULT_PATH;
-    string string_command = "rm -r " + temp + "*";
-//    cout << string_command << endl;
-    const char *command = string_command.c_str();
-    system(command);
-}

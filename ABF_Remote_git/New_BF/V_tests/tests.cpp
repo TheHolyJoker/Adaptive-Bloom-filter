@@ -174,7 +174,7 @@ rates_attempt(size_t n, double eps, size_t insertion_reps, size_t lookup_reps, b
     // [TN, FP, TP]
     int counter[3] = {0, 0, 0};
     t0 = clock();
-    for (auto iter : nom_set) ++counter[w.lookup_verifier(&iter, call_adapt, true)];
+    for (auto iter : nom_set) ++counter[w.lookup_verifier(&iter, call_adapt)];
 
     double lookup_time = (clock() - t0) / ((double) CLOCKS_PER_SEC);
     double total_run_time = (clock() - startRunTime) / ((double) CLOCKS_PER_SEC);
@@ -264,11 +264,12 @@ double get_relative_deviation(double act_res, double exp_res) {
 
 
 string test_get_output_file_path(bool is_adaptive, bool call_adapt) {
-    string temp_path = DEFAULT_OUTPUT_PATH;
+//    string temp_path = DEFAULT_OUTPUT_PATH;
+    string temp_path = DEFAULT_REL_OUTPUT_PATH;
     string suffix = DEFAULT_OUTPUT_FILE_SUFFIX;
     if (!is_adaptive) {
         temp_path += "Regular/";
-        size_t num = Wrapper::count_files(temp_path);
+        size_t num = test_count_files(temp_path);
         temp_path += to_string(num);
         return temp_path + suffix;
     }
@@ -276,8 +277,22 @@ string test_get_output_file_path(bool is_adaptive, bool call_adapt) {
     temp_path += "Adaptive/";
     temp_path += (call_adapt) ? "With_Adapt/" : "Without_Adapt/";
 
-    size_t num = Wrapper::count_files(temp_path);
+    size_t num = test_count_files(temp_path);
     temp_path += to_string(num);
     return temp_path + suffix;
 
+}
+
+size_t test_count_files(const string &path) {
+    size_t counter = 0;
+    DIR *dir;
+    struct dirent *ent;
+    const char *char_path = path.c_str();
+    if ((dir = opendir(char_path)) != nullptr) {
+        while ((ent = readdir(dir)) != nullptr)
+            counter++;
+        closedir(dir);
+        return counter;
+    }
+    return -1;
 }

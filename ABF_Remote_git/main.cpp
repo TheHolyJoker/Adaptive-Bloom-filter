@@ -15,7 +15,6 @@ int main() {
 
     cout << "Start" << endl;
 
-
     size_t shift = 15;
     size_t exp_el = 1ULL << shift;
     double eps = 0.01;

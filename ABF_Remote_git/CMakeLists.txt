@@ -37,6 +37,5 @@ add_executable(ABF_Remote
 
         #        QF_files/.
 #        BF_files/BF_MH.h
-        New_BF/main.cpp
-#        New_BF/Clean_main/atom.cpp New_BF/Clean_main/atom.h
-        )
+        #        New_BF/Clean_main/atom.cpp New_BF/Clean_main/atom.h
+        New_BF/Remote/Remote.cpp New_BF/Remote/Remote.h)

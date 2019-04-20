@@ -18,7 +18,7 @@
 
 #define DEFAULT_SEED 2
 #define SECOND_SEED 42
-#define DEFAULT_OUTPUT_PATH "/home/tomer/Desktop/Project/Be_Tree/ABF_Remote/New_BF/Outputs/"
+#define DEFAULT_REL_OUTPUT_PATH "../New_BF/Outputs/"
 #define DEFAULT_OUTPUT_FILE_SUFFIX ".out"
 
 

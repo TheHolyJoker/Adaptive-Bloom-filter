@@ -4,24 +4,6 @@
 
 #include "GeneralBF.h"
 
-/*GeneralBF::GeneralBF(size_t n, size_t m, bool is_adaptive) :is_adaptive(is_adaptive), size(m){
-    //todo clean this.
-    size_t k = get_hashFunction_num(n, m);
-    if (is_adaptive)
-        m <<= 1;// NOLINT(hicpp-signed-bitwise)
-    assert(m >= 4 && k >= 1);
-    this->size = m;
-    this->bit_array.resize(m, false);
-    this->hashVec.resize(k);
-    for (int i = 0; i < k; ++i)
-        this->hashVec[i] = Hash(size, is_adaptive);
-
-    one_file_per_object_backing_store bs(path);
-    swap_space sspace(&bs, CACHE_SIZE);
-    this->Remote = new betree<uint64_t, std::string>(&sspace, MAX_NODE_SIZE, MIN_FLUSH_SIZE);
-}*/
-
-
 
 GeneralBF::GeneralBF(size_t size, size_t k_hashFunc, bool is_adaptive) : is_adaptive(is_adaptive), size(size) {
 
@@ -65,7 +47,7 @@ bool GeneralBF::add(string *s) {
         this->bit_array[temp_index] = true;
         if (this->bit_array[temp_index bitor 1]) {  // NOLINT(hicpp-signed-bitwise)
             did_not_hit_FP = false;
-            //Todo break here! Rob's and Alex's comment.
+            //Todo break here.
         }
     }
     return did_not_hit_FP;
@@ -108,7 +90,6 @@ filter_lookup_res GeneralBF::lookup(string *s) {
     if (!this->is_adaptive)
         return this->non_adaptive_lookup(s);
 
-//    bool did_hit_FP = false;
     for (auto h : this->hashVec) {
         size_t temp_index = h(s) << 1; // NOLINT(hicpp-signed-bitwise)
 
@@ -119,15 +100,8 @@ filter_lookup_res GeneralBF::lookup(string *s) {
         if (bit_array[temp_index bitor 1])  // Hit a FP?  //NOLINT(hicpp-signed-bitwise)
             return IDK_check_next_level;
 
-        /*if (bit_array[temp_index]) {
-            if (bit_array[temp_index bitor 1])  // Hit a FP?  //NOLINT(hicpp-signed-bitwise)
-                did_hit_FP = true;
-        } else
-            return definitely_not_in_filter;*/
     }
     return maybe_in_filter;
-//    if (did_hit_FP)
-//        return IDK_check_next_level;
 }
 
 filter_lookup_res GeneralBF::non_adaptive_lookup(string *s) {
@@ -178,17 +152,7 @@ size_t GeneralBF::get_stale_on_bits() const {
     }
     return sum;
 }
-/*
 
-bool* GeneralBF::operator[](size_t index) {
-    return &(this->bit_array[index]);
-
-}
-
-bool* GeneralBF::operator[](size_t index) const {
-    return &this->bit_array[index];
-}
-*/
 
 ostream &operator<<(ostream &os, const GeneralBF &generalBf) {
     bool is_adaptive = generalBf.is_adaptive;
@@ -224,30 +188,6 @@ void GeneralBF::set_stale_on(size_t index) {
 size_t GeneralBF::get_hash_vec_size() const {
     return this->hashVec.size();
 }
-/*
-
-ostream &operator<<(ostream &os, const GeneralBF &generalBf) {
-    const size_t size = generalBf.getSize();
-    const size_t k = generalBf.get_hash_vec().size();
-    os << "b_filter size: " << size;
-    os << "\tk is: " << k;
-    print_hashFunctions(os, generalBf);
-    os << "Number of on bits in filter: " << generalBf.get_filter_on_bits() << "\tRatio is: "
-       << ((double) generalBf.get_filter_on_bits()) / size << endl;
-    if (generalBf->is_adaptive)
-        os << "Number of on bits in stale: " << generalBf.get_stale_on_bits() << "\tRatio is: "
-           << ((double) generalBf.get_stale_on_bits()) / size << endl;
-    */
-/*for (auto h : bfr.kHashFuncs) {
-        const size_t a = h->getMultiConst();
-//        if(a >= bfr.size) os << "$$$\n$$$\n$$$\nnext hash function multiConst is too big:";
-        os << a << "|";
-    }*//*
-
-    os << endl;
-    return os;
-}
-*/
 
 ostream &print_hashFunctions(ostream &os, const GeneralBF &generalBf) {
 

@@ -13,7 +13,6 @@
 #define MIN_CHAR_RANGE 32
 #define MIN_LENGTH_RANGE 8
 
-//using namespace std;
 
 string rand_string(int minLength, int charsNum, int numOfDiffLength = MIN_LENGTH_RANGE);
 
@@ -65,5 +64,8 @@ ostream &counter_printer(ostream &os, int *counter);
 double get_relative_deviation(double act_res, double exp_res);
 
 string test_get_output_file_path(bool is_adaptive, bool call_adapt);
+
+size_t test_count_files(const string &path);
+
 
 #endif //ABF_REMOTE_TESTS_H

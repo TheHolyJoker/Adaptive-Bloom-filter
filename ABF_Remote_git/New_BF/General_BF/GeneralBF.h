@@ -17,12 +17,6 @@ enum filter_lookup_res {
     maybe_in_filter, definitely_not_in_filter, IDK_check_next_level
 };
 
-/*
-//    filter, not_in
-//    true_positive, false_positive, true_negative, false_negative, maybe_in_next_level
-//};
-*/
-
 class GeneralBF {
 
     vector<bool> bit_array;
@@ -107,7 +101,6 @@ private:
 ostream &operator<<(ostream &os, const GeneralBF &generalBf);
 */
 
-//Todo prints the first hash function twice.
 /**
  * Print the BF's hash functions as in array.
  * @param os
