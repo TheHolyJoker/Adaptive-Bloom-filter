@@ -22,6 +22,9 @@ void
 DB_AdaptivenessTest(size_t q, size_t r, size_t elementNum, size_t lookupReps);
 
 ostream &
+only_quotient_rates(size_t q, size_t r, double loadFactor, size_t lookupReps, bool isAdaptive, ostream &os = cout);
+
+ostream &
 DB_rates(size_t q, size_t r, double loadFactor, size_t lookupReps, bool isAdaptive, ostream &os = cout);
 
 

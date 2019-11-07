@@ -77,15 +77,16 @@ public:
 */
     friend ostream &operator<<(ostream &os, const GeneralBF &bf);
 
+    void non_adaptive_add(string *s);
+
+    filter_lookup_res non_adaptive_lookup(string *s);
+
 private:
 
     GeneralBF(size_t n, size_t m, bool isAdaptive, const string &path) : GeneralBF(n, m, isAdaptive) {}
 
-    void non_adaptive_add(string *s);
-
     void non_adaptive_add(string *s, bool *cell_cond);
 
-    filter_lookup_res non_adaptive_lookup(string *s);
 };
 
 /*

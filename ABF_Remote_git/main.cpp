@@ -22,7 +22,15 @@ int main() {
     size_t lookups = 1ULL << (shift - 2);
     bool is_adaptive = false;
     bool call_adapt = false;
+    stringstream s;
 
+
+    bf_only_rates(exp_el, eps, insertions, lookups, false, false, s);
+    bf_only_rates(exp_el, eps, insertions, lookups, false, false, s);
+    bf_only_rates(exp_el, eps, insertions, lookups, false, false, s);
+    bf_only_rates(exp_el, eps, insertions, lookups, false, false, s);
+    bf_only_rates(exp_el, eps, insertions, lookups, false, false, s);
+/*
 
     ////Without using the remote
     auto_rates(exp_el, eps, insertions, lookups, false, false, false, true, false); //not adaptive.
@@ -32,6 +40,7 @@ int main() {
     auto_rates(exp_el, eps, insertions, lookups, false, false, true, false, false); //not adaptive
     auto_rates(exp_el, eps, insertions, lookups, true, false, true, false, false); //Adaptive but doesn't call adapt.
     auto_rates(exp_el, eps, insertions, lookups, true, true, true, false, false); //Adaptive.
+*/
 
     cout << "End" << endl;
     return 0;

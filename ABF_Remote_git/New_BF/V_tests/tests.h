@@ -40,6 +40,10 @@ validate(size_t expected_el_num, double eps, size_t insertion_num, size_t lookup
 void auto_rates(size_t n, double eps, size_t insertion_reps, size_t lookup_reps, bool is_adaptive, bool call_adapt,
                 bool remote_opt, bool naive_check, bool to_cout);
 
+
+ostream &
+bf_only_rates(size_t n, double eps, size_t insertion_reps, size_t lookup_reps, bool is_adaptive, bool call_adapt, ostream &os);
+
 ostream &
 rates(size_t n, double eps, size_t insertion_reps, size_t lookup_reps, bool is_adaptive, bool call_adapt, ostream &os);
 

@@ -24,7 +24,7 @@ public:
     int lookup(string *s);
 
 
-private:
+//private:
     void adapt(vector<string> *elementVec, size_t fpIndex, size_t level);
 
     int nonAdaptiveLookup(string *s);

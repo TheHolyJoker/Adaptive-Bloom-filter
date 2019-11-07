@@ -111,6 +111,46 @@ void auto_rates(size_t n, double eps, size_t insertion_reps, size_t lookup_reps,
 }
 
 ostream &
+bf_only_rates(size_t n, double eps, size_t insertion_reps, size_t lookup_reps, bool is_adaptive, bool call_adapt,
+              ostream &os) {
+    clock_t startRunTime = clock();
+    set<string> member_set, nom_set;
+
+    clock_t t0 = clock();
+    set_init(insertion_reps, &member_set);
+    double member_set_init_time = (clock() - t0) / ((double) CLOCKS_PER_SEC);
+
+    t0 = clock();
+    GeneralBF w(n, eps, is_adaptive);
+    double init_time = (clock() - t0) / ((double) CLOCKS_PER_SEC);
+
+    t0 = clock();
+    for (auto iter : member_set) w.non_adaptive_add(&iter);
+    double insertion_time = (clock() - t0) / ((double) CLOCKS_PER_SEC);
+
+    t0 = clock();
+    set_init(lookup_reps, &nom_set);
+    double nom_set_init_time = (clock() - t0) / ((double) CLOCKS_PER_SEC);
+    double set_ratio = nom_set.size() / (double) lookup_reps;
+
+    // [TN, FP, TP]
+    int counter[3] = {0, 0, 0};
+    t0 = clock();
+    for (auto iter : nom_set) w.non_adaptive_lookup(&iter);
+
+    double lookup_time = (clock() - t0) / ((double) CLOCKS_PER_SEC);
+    double total_run_time = (clock() - startRunTime) / ((double) CLOCKS_PER_SEC);
+
+
+    test_printer(n, eps, lookup_reps, is_adaptive, set_ratio, counter, member_set_init_time, nom_set_init_time,
+                 init_time, insertion_time, lookup_time, total_run_time, os);
+
+    os << w;
+    return os;
+}
+
+
+ostream &
 rates(size_t n, double eps, size_t insertion_reps, size_t lookup_reps, bool is_adaptive, bool call_adapt, ostream &os) {
     clock_t startRunTime = clock();
     set<string> member_set, nom_set;
@@ -201,7 +241,7 @@ ostream &naive_rates(size_t n, double eps, size_t insertion_reps, size_t lookup_
     double init_time = (clock() - t0) / ((double) CLOCKS_PER_SEC);
 
     t0 = clock();
-    for (auto iter : member_set) w.naive_add(&iter,0);
+    for (auto iter : member_set) w.naive_add(&iter, 0);
     double insertion_time = (clock() - t0) / ((double) CLOCKS_PER_SEC);
 
     t0 = clock();

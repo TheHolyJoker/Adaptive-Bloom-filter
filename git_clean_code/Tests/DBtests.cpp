@@ -83,6 +83,54 @@ void DB_AdaptivenessTest(size_t q, size_t r, size_t elementNum, size_t lookupRep
 }
 
 
+ostream &only_quotient_rates(size_t q, size_t r, double loadFactor, size_t lookupReps, bool isAdaptive, ostream &os) {
+    string name =  "Not adaptive:";
+//    os << name << endl;
+//    cout << name << endl;
+    clock_t t0 = clock(), temp;
+    DB db(q, r, false);
+    double qfInitTime = TIME_PASSED_FROM(t0);
+
+    size_t setSize = size_t(ceil(SL(q) * loadFactor));
+    set<string> memberSet, lookupSet;
+    temp = clock();
+    setInit(setSize, &memberSet);
+    double memberSetInitTime = TIME_PASSED_FROM((temp));
+
+    temp = clock();
+    setInit(lookupReps, &lookupSet);
+    double lookupSetInitTime = TIME_PASSED_FROM((temp));
+
+    temp = clock();
+    for (auto s: memberSet) db.nonAdaptiveAdd(&s);
+    double insertionTime = TIME_PASSED_FROM((temp));
+
+//    db.statusCorrectness(true, os);
+
+    /*temp = clock();
+    for (auto s: lookupSet)
+        db.lookup(&s, vLength);
+    cout << "First vlLookup time is: " << TIME_PASSED_FROM((temp)) << endl;*/
+
+
+    // [TN, FP, TP]
+    int counter[3] = {0};
+    temp = clock();
+    for (auto s: lookupSet) db.nonAdaptiveLookup(&s);
+
+    double lookupTime = TIME_PASSED_FROM((temp));
+
+
+    getStats(qfInitTime, memberSetInitTime, lookupSetInitTime, insertionTime, lookupTime,
+             setSize, lookupReps, counter, os);
+    os << 1.0 / SL(r + q) << endl;
+    os << "Total run time: " << TIME_PASSED_FROM(t0) << endl;
+
+//    db.statisticsPrint(os);
+
+    return os;
+}
+
 ostream &DB_rates(size_t q, size_t r, double loadFactor, size_t lookupReps, bool isAdaptive, ostream &os) {
     string name = (isAdaptive) ? "Adaptive:" : "Not adaptive:";
     os << name << endl;
@@ -143,7 +191,7 @@ getStats(double qfInitTime, double memberSetInitTime, double lookupSetInitTime, 
     os << "lookupSetInitTime: " << lookupSetInitTime << endl;
     double insertionRatio = memberSetSize / insertionTime;
     os << "insertionTime: " << insertionTime << "\tSpeed: " << insertionRatio << " el/s" << endl;
-    cout << "insertionTime: " << insertionTime << "\tSpeed: " << insertionRatio << " el/s" << endl;
+    cout << "insertionTime: " << insertionTime << "\tSpeed: " << insertionRatio << " el/s.\t";
     double lookupRatio = lookupReps / lookupTime;
     os << "lookupTime: " << lookupTime << "\tSpeed: " << lookupRatio << " el/s" << endl;
     cout << "lookupTime: " << lookupTime << "\tSpeed: " << lookupRatio << " el/s" << endl;

@@ -6,11 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/tomer/Desktop/Project/CQF/newQF (copy)/GlobalFunctions/globalFunction.cpp
-globalFunction.h
-/home/tomer/Desktop/Project/CQF/newQF (copy)/GlobalFunctions/globalFunction.h
-
-/home/tomer/Desktop/Project/CQF/newQF (copy)/GlobalFunctions/globalFunction.h
+/home/tomer/Desktop/Fourth_Year/NewProject/Old_Code/Adaptive-Bloom-filter/git_clean_code/GlobalFunctions/globalFunction.h
 iostream
 -
 assert.h
@@ -22,15 +18,11 @@ algorithm
 tgmath.h
 -
 
-/home/tomer/Desktop/Project/CQF/newQF (copy)/Hash/Hash.cpp
-Hash.h
-/home/tomer/Desktop/Project/CQF/newQF (copy)/Hash/Hash.h
-
-/home/tomer/Desktop/Project/CQF/newQF (copy)/Hash/Hash.h
+/home/tomer/Desktop/Fourth_Year/NewProject/Old_Code/Adaptive-Bloom-filter/git_clean_code/Hash/Hash.h
 MurmurHash3.h
-/home/tomer/Desktop/Project/CQF/newQF (copy)/Hash/MurmurHash3.h
+/home/tomer/Desktop/Fourth_Year/NewProject/Old_Code/Adaptive-Bloom-filter/git_clean_code/Hash/MurmurHash3.h
 ../GlobalFunctions/globalFunction.h
-/home/tomer/Desktop/Project/CQF/newQF (copy)/GlobalFunctions/globalFunction.h
+/home/tomer/Desktop/Fourth_Year/NewProject/Old_Code/Adaptive-Bloom-filter/git_clean_code/GlobalFunctions/globalFunction.h
 iostream
 -
 cstring
@@ -40,71 +32,45 @@ random
 assert.h
 -
 
-/home/tomer/Desktop/Project/CQF/newQF (copy)/Hash/MurmurHash3.cpp
-MurmurHash3.h
-/home/tomer/Desktop/Project/CQF/newQF (copy)/Hash/MurmurHash3.h
-stdlib.h
--
-
-/home/tomer/Desktop/Project/CQF/newQF (copy)/Hash/MurmurHash3.h
+/home/tomer/Desktop/Fourth_Year/NewProject/Old_Code/Adaptive-Bloom-filter/git_clean_code/Hash/MurmurHash3.h
 stdint.h
 -
 
-/home/tomer/Desktop/Project/CQF/newQF (copy)/QuotientFilter/BasicFilter.cpp
-BasicFilter.h
-/home/tomer/Desktop/Project/CQF/newQF (copy)/QuotientFilter/BasicFilter.h
-
-/home/tomer/Desktop/Project/CQF/newQF (copy)/QuotientFilter/BasicFilter.h
+/home/tomer/Desktop/Fourth_Year/NewProject/Old_Code/Adaptive-Bloom-filter/git_clean_code/QuotientFilter/BasicFilter.h
 BitArray.h
-/home/tomer/Desktop/Project/CQF/newQF (copy)/QuotientFilter/BitArray.h
+/home/tomer/Desktop/Fourth_Year/NewProject/Old_Code/Adaptive-Bloom-filter/git_clean_code/QuotientFilter/BitArray.h
 
-/home/tomer/Desktop/Project/CQF/newQF (copy)/QuotientFilter/BitArray.cpp
-BitArray.h
-/home/tomer/Desktop/Project/CQF/newQF (copy)/QuotientFilter/BitArray.h
-
-/home/tomer/Desktop/Project/CQF/newQF (copy)/QuotientFilter/BitArray.h
+/home/tomer/Desktop/Fourth_Year/NewProject/Old_Code/Adaptive-Bloom-filter/git_clean_code/QuotientFilter/BitArray.h
 ../GlobalFunctions/globalFunction.h
-/home/tomer/Desktop/Project/CQF/newQF (copy)/GlobalFunctions/globalFunction.h
+/home/tomer/Desktop/Fourth_Year/NewProject/Old_Code/Adaptive-Bloom-filter/git_clean_code/GlobalFunctions/globalFunction.h
 
-/home/tomer/Desktop/Project/CQF/newQF (copy)/QuotientFilter/DB.cpp
-DB.h
-/home/tomer/Desktop/Project/CQF/newQF (copy)/QuotientFilter/DB.h
-
-/home/tomer/Desktop/Project/CQF/newQF (copy)/QuotientFilter/DB.h
+/home/tomer/Desktop/Fourth_Year/NewProject/Old_Code/Adaptive-Bloom-filter/git_clean_code/QuotientFilter/DB.h
 Filter.h
-/home/tomer/Desktop/Project/CQF/newQF (copy)/QuotientFilter/Filter.h
+/home/tomer/Desktop/Fourth_Year/NewProject/Old_Code/Adaptive-Bloom-filter/git_clean_code/QuotientFilter/Filter.h
 map
 -
 
-/home/tomer/Desktop/Project/CQF/newQF (copy)/QuotientFilter/Filter.cpp
-Filter.h
-/home/tomer/Desktop/Project/CQF/newQF (copy)/QuotientFilter/Filter.h
-
-/home/tomer/Desktop/Project/CQF/newQF (copy)/QuotientFilter/Filter.h
+/home/tomer/Desktop/Fourth_Year/NewProject/Old_Code/Adaptive-Bloom-filter/git_clean_code/QuotientFilter/Filter.h
 ../Hash/Hash.h
-/home/tomer/Desktop/Project/CQF/newQF (copy)/Hash/Hash.h
+/home/tomer/Desktop/Fourth_Year/NewProject/Old_Code/Adaptive-Bloom-filter/git_clean_code/Hash/Hash.h
 BasicFilter.h
-/home/tomer/Desktop/Project/CQF/newQF (copy)/QuotientFilter/BasicFilter.h
+/home/tomer/Desktop/Fourth_Year/NewProject/Old_Code/Adaptive-Bloom-filter/git_clean_code/QuotientFilter/BasicFilter.h
 tuple
 -
 
-/home/tomer/Desktop/Project/CQF/newQF (copy)/Tests/DBtests.cpp
-DBtests.h
-/home/tomer/Desktop/Project/CQF/newQF (copy)/Tests/DBtests.h
-
-/home/tomer/Desktop/Project/CQF/newQF (copy)/Tests/DBtests.h
+/home/tomer/Desktop/Fourth_Year/NewProject/Old_Code/Adaptive-Bloom-filter/git_clean_code/Tests/DBtests.h
 ../QuotientFilter/DB.h
-/home/tomer/Desktop/Project/CQF/newQF (copy)/QuotientFilter/DB.h
+/home/tomer/Desktop/Fourth_Year/NewProject/Old_Code/Adaptive-Bloom-filter/git_clean_code/QuotientFilter/DB.h
 set
 -
 
-/home/tomer/Desktop/Project/CQF/newQF (copy)/main.cpp
+/home/tomer/Desktop/Fourth_Year/NewProject/Old_Code/Adaptive-Bloom-filter/git_clean_code/main.cpp
 iostream
 -
 Hash/Hash.h
-/home/tomer/Desktop/Project/CQF/newQF (copy)/Hash/Hash.h
+/home/tomer/Desktop/Fourth_Year/NewProject/Old_Code/Adaptive-Bloom-filter/git_clean_code/Hash/Hash.h
 QuotientFilter/DB.h
-/home/tomer/Desktop/Project/CQF/newQF (copy)/QuotientFilter/DB.h
+/home/tomer/Desktop/Fourth_Year/NewProject/Old_Code/Adaptive-Bloom-filter/git_clean_code/QuotientFilter/DB.h
 Tests/DBtests.h
-/home/tomer/Desktop/Project/CQF/newQF (copy)/Tests/DBtests.h
+/home/tomer/Desktop/Fourth_Year/NewProject/Old_Code/Adaptive-Bloom-filter/git_clean_code/Tests/DBtests.h
 

@@ -7,17 +7,25 @@ int main() {
     cout << "Hello, World!" << endl;
 
 //    srand(time(NULL));
-    double loadFactor = 0.7;
-    size_t q = 16, r = 9, numberOfElements = size_t(loadFactor * SL(q)), reps = SL(q-6);
+    double loadFactor = 0.75;
+    size_t q = 15, r = 6, numberOfElements = size_t(loadFactor * SL(q)), reps = SL(13ul);
 //    t1(true);
 //    t1(false);
     stringstream s;
 
-
+    for (int i = 0; i < 32; ++i) {
+        only_quotient_rates(q, r, loadFactor, reps, false, s);
+    }
+//    only_quotient_rates(q, r, loadFactor, reps, false, s);
+//    only_quotient_rates(q, r, loadFactor, reps, false, s);
+//    only_quotient_rates(q, r, loadFactor, reps, false, s);
+//    only_quotient_rates(q, r, loadFactor, reps, false, s);
+    /*DB_rates(q, r, loadFactor, reps, false, s);
+    DB_rates(q, r, loadFactor, reps, false, s);
     DB_rates(q, r, loadFactor, reps, false, s);
     DB_rates(q, r, loadFactor, reps, true, s);
-
-    cout << endl << endl << s.str();
+*/
+//    cout << endl << endl << s.str();
 //    DB_AdaptivenessTest(q, r, numberOfElements, reps);
 
     //    DB_TPLookup(q, r, numberOfElements, true);
